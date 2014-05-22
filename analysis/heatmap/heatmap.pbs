@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -l walltime=36:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+#python heatmap.py -i /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5_chipseq.rmdup.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o stat5.pe
+#python heatmap.py -i /home/farrarm/shared/riss/ikaros/mapping_peak_calling/ikaros_HA_tagged_1_chipseq.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o HA_tagged_1
+#python heatmap.py -i /home/farrarm/shared/riss/ikaros/mapping_peak_calling/ikaros_HA_tagged_2_chipseq.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o HA_tagged_2
+#python heatmap.py -i /home/farrarm/shared/riss/ikaros/mapping_peak_calling/primary_cells/ikaros_primary_IP_1_chipseq.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o primary_1
+#python heatmap.py -i /home/farrarm/shared/riss/ikaros/mapping_peak_calling/primary_cells/ikaros_primary_IP_2_chipseq.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o primary_2
+python heatmap.py -i /home/farrarm/shared/riss/ikaros/mapping_peak_calling/primary_cells/ikaros_primary_IP_bothsamples_chipseq.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o primary
+python heatmap.py -i /home/farrarm/shared/riss/ikaros/mapping_peak_calling/ikaros_HA_bothsamples_chipseq.unique.bam -b /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_summits.bed.sorted.bed -o HAtag

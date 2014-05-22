@@ -1,0 +1,39 @@
+#!/bin/bash                             
+#PBS -l nodes=1:ppn=8,mem=32gb,walltime=48:00:00
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+
+module load fastqc
+module load cutadapt
+module load usearch
+module load riss_util
+
+cd $PBS_O_WORKDIR
+datapath="/home/farrarm/data_release/umgc/hiseq/140123_700506R_0322_BC3KD4ACXX/Project_Farrar_Project_008"
+
+cutadapt -a='GATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNATCTCGTATGCCGTCTTCTGCTTG' --error-rate=0.1 --times=1 --overlap=5 $datapath/Input_GTGAAA_L004_R1_001.fastq > input_R1.fastq
+
+
+#Now, quality trim the data
+#Copy python.tar.gz from Getiria's scratch space (/scratch/onson001) and uncompress
+#Then modify your python path as I've done here, substituting your username for mine
+PYTHONPATH=/home/msistaff/yang4414/software/python/galaxy_sequence_utils-1.0.0/lib:$PYTHONPATH; export PYTHONPATH
+
+#Now you can use the fastq quality trimming tool from Galaxy, which allows you to use a sliding window
+# -f sanger is for Sanger or Illumina 1.9 data; -s 3 is for size of the sliding window ; -t is for the sliding window step size; -e 3 is for which end to trim; -a min -c '>=' and -q 20 together mean to check if the minimum quality score for the window is >= 20; 0 and  is for; -x 0 is for the maximum number of bases to exclude from the window during trimming
+python /home/msistaff/yang4414/software/python/fastq_trimmer_by_quality.py input_R1.fastq input_R1_trimmed.fastq -f sanger -s 3 -t 1 -e 3 -a min -x 0 -c '>=' -q 20.0
+python /home/msistaff/yang4414/software/python/fastq_trimmer_by_quality.py $datapath/Input_GTGAAA_L004_R2_001.fastq input_R2_trimmed.fastq -f sanger -s 3 -t 1 -e 3 -a min -x 0 -c '>=' -q 20.0
+
+#Now filter the data to remove reads less than 50 bp (since all reads from the MiSeq data are 151 and from the HiSeq are 100, this shouldn't remove many
+usearch -fastq_filter  input_R1_trimmed.fastq -fastq_minlen 50 -fastqout input_R1_trimmed_filt50.fastq 
+usearch -fastq_filter  input_R2_trimmed.fastq -fastq_minlen 50 -fastqout input_R2_trimmed_filt50.fastq  
+
+#Resync the data
+resync.pl input_R1_trimmed_filt50.fastq input_R2_trimmed_filt50.fastq input_R1_trimmed_synced.fastq input_R2_trimmed_synced.fastq
+
+#Check to verify that they're resynced
+pe-sync-2-files.pl input_R1_trimmed_synced.fastq input_R2_trimmed_synced.fastq
+
+#Run a fastqc on the pre-processed data
+fastqc input_R1_trimmed_synced.fastq -o $PBS_O_WORKDIR
+fastqc input_R2_trimmed_synced.fastq -o $PBS_O_WORKDIR

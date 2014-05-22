@@ -1,0 +1,5 @@
+python count_motif_pfm.py ~/project/NGStoolbox/chipseq/motif/TRANSFACT/M00457_STAT5A_01.pfm /home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5.pairend_peaks.sorted.fa |head -1000 >stat5_motif_peak.bed
+
+slopBed -i stat5_motif_peak.bed -b 100 -g /panfs/roc/rissdb/genomes/Mus_musculus/mm10/seq/mm10.len >stat5_motif_peak.100.bed
+
+fastaFromBed -fi /panfs/roc/rissdb/genomes/Mus_musculus/mm10/seq/mm10.fa -bed stat5_motif_peak.100.bed -fo stat5_motif_peak.100.fa

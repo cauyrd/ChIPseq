@@ -1,0 +1,6 @@
+R CMD BATCH --no-save --no-restore '--args VCaP_AR_Vechile_igg.hpeak.bed.uniqname VCaP_AR_DHT_igg.hpeak.bed.uniqname VCaP_AR_DHT_Bicalutamide_igg.hpeak.bed.uniqname Vechile DHT DHT-Bicalutamide ar-bicalutamide' venn.3.r
+R CMD BATCH --no-save --no-restore '--args VCaP_AR_Vechile_igg.hpeak.bed.uniqname VCaP_AR_DHT_igg.hpeak.bed.uniqname VCaP_AR_DHT_JQ1_igg.hpeak.bed.uniqname Vechile DHT DHT-JQ1 ar-jq1' venn.3.r
+R CMD BATCH --no-save --no-restore '--args VCaP_AR_Vechile_igg.hpeak.bed.uniqname VCaP_AR_DHT_igg.hpeak.bed.uniqname VCaP_AR_DHT_MDV3100_igg.hpeak.bed.uniqname Vechile DHT DHT-MDV3100 ar-mdv3100' venn.3.r
+R CMD BATCH --no-save --no-restore '--args VCaP_PolII_Vechile_igg.hpeak.bed.uniqname VCaP_PolII_DHT_igg.hpeak.bed.uniqname VCaP_PolII_DHT_Bicalutamide_igg.hpeak.bed.uniqname Vechile DHT DHT-Bicalutamide pol2-bicalutamide' venn.3.r
+R CMD BATCH --no-save --no-restore '--args VCaP_PolII_Vechile_igg.hpeak.bed.uniqname VCaP_PolII_DHT_igg.hpeak.bed.uniqname VCaP_PolII_DHT_JQ1_igg.hpeak.bed.uniqname Vechile DHT DHT-JQ1 pol2-jq1' venn.3.r
+R CMD BATCH --no-save --no-restore '--args VCaP_PolII_Vechile_igg.hpeak.bed.uniqname VCaP_PolII_DHT_igg.hpeak.bed.uniqname VCaP_PolII_DHT_MDV3100_igg.hpeak.bed.uniqname Vechile DHT DHT-MDV3100 pol2-mdv3100' venn.3.r

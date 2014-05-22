@@ -1,0 +1,54 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=16gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+module load bwa
+module load samtools
+module load bedtools
+module load igv
+module load picard-tools
+
+reference="/panfs/roc/rissdb/genomes/Mus_musculus/mm10/bwa/mm10.fa"
+datapath="/home/farrarm/shared/riss/stat5/preprocessing"
+
+# BWA paried end mapping treatment and control
+echo BWA paried end mapping treatment and control
+bwa aln -t8 $reference $datapath/stat5_R1_trimmed_synced.fastq >sample1.sai
+bwa aln -t8 $reference $datapath/stat5_R2_trimmed_synced.fastq >sample2.sai
+bwa sampe $reference sample1.sai sample2.sai $datapath/stat5_R1_trimmed_synced.fastq $datapath/stat5_R2_trimmed_synced.fastq >stat5_chipseq.sam
+samtools view -bS stat5_chipseq.sam >stat5_chipseq.bam
+samtools sort stat5_chipseq.bam stat5_chipseq.sorted
+samtools index stat5_chipseq.sorted.bam
+
+bwa aln -t8 $reference $datapath/input_R1_trimmed_synced.fastq >input1.sai
+bwa aln -t8 $reference $datapath/input_R2_trimmed_synced.fastq >input2.sai
+bwa sampe $reference input1.sai input2.sai $datapath/input_R1_trimmed_synced.fastq $datapath/input_R2_trimmed_synced.fastq >stat5_input.sam
+samtools view -bS stat5_input.sam >stat5_input.bam
+samtools sort stat5_input.bam stat5_input.sorted
+samtools index stat5_input.sorted.bam
+rm *.sam stat5_chipseq.bam stat5_input.bam 
+
+# BAM to TDF for IGV
+#echo BAM to TDF for IGV
+#igvtools count stat5_chipseq.sorted.bam stat5_chipseq.tdf mm10
+#igvtools count stat5_input.sorted.bam stat5_input.tdf mm10
+
+# mark duplicate read
+echo mark duplicate read
+java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=stat5_chipseq.sorted.bam O=stat5_chipseq.rmdup.bam M=stat5_chipseq.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=stat5_input.sorted.bam O=stat5_input.rmdup.bam M=stat5_input.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+
+# Extract the uniquely mapped read
+echo Extract the uniquely mapped read
+samtools view -b -q 1 stat5_chipseq.rmdup.bam >stat5_chipseq.rmdup.unique.bam
+samtools view -b -q 1 stat5_input.rmdup.bam >stat5_input.rmdup.unique.bam
+
+# BAM to TDF for IGV
+echo BAM to TDF for IGV
+igvtools count stat5_chipseq.rmdup.unique.bam stat5_chipseq.rmdup.unique.tdf mm10
+igvtools count stat5_input.rmdup.unique.bam stat5_input.rmdup.unique.tdf mm10
+
+# MACS peak calling
+echo MACS peak calling
+macs2 callpeak -t stat5_chipseq.rmdup.unique.bam -c stat5_input.rmdup.unique.bam -f BAMPE -g mm -n stat5.pairend -s 101

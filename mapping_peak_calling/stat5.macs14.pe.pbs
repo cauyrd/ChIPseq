@@ -1,0 +1,66 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=16gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+module load bwa
+module load macs
+module load samtools
+module load bedtools
+module load igv
+module load picard-tools
+
+reference="/panfs/roc/rissdb/genomes/Mus_musculus/mm10/bwa/mm10.fa"
+datapath="/home/farrarm/data_release/umgc/hiseq/140123_700506R_0322_BC3KD4ACXX/Project_Farrar_Project_008"
+
+# BWA paried end mapping treatment and control
+echo BWA paried end mapping treatment and control
+bwa aln -t8 $reference $datapath/STAT5_ACAGTG_L004_R1_001.fastq >sample1.sai
+bwa aln -t8 $reference $datapath/STAT5_ACAGTG_L004_R2_001.fastq >sample2.sai
+bwa sampe $reference sample1.sai sample2.sai $datapath/STAT5_ACAGTG_L004_R1_001.fastq $datapath/STAT5_ACAGTG_L004_R2_001.fastq >stat5_chipseq.sam
+samtools view -bS stat5_chipseq.sam >stat5_chipseq.bam
+samtools sort stat5_chipseq.bam stat5_chipseq.sorted
+samtools index stat5_chipseq.sorted.bam
+
+bwa aln -t8 $reference $datapath/Input_GTGAAA_L004_R1_001.fastq >input1.sai
+bwa aln -t8 $reference $datapath/Input_GTGAAA_L004_R2_001.fastq >input2.sai
+bwa sampe $reference input1.sai input2.sai $datapath/Input_GTGAAA_L004_R1_001.fastq $datapath/Input_GTGAAA_L004_R2_001.fastq >stat5_input.sam
+samtools view -bS stat5_input.sam >stat5_input.bam
+samtools sort stat5_input.bam stat5_input.sorted
+samtools index stat5_input.sorted.bam
+rm *.sam stat5_chipseq.bam stat5_input.bam 
+
+# BAM to TDF for IGV
+echo BAM to TDF for IGV
+igvtools count stat5_chipseq.sorted.bam stat5_chipseq.tdf mm10
+igvtools count stat5_input.sorted.bam stat5_input.tdf mm10
+
+# mark duplicate read
+echo mark duplicate read
+java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=stat5_chipseq.sorted.bam O=stat5_chipseq.rmdup.bam M=stat5_chipseq.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=stat5_input.sorted.bam O=stat5_input.rmdup.bam M=stat5_input.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+
+# Extract the first read in pair
+echo Extract the first read in pair
+samtools view -b -f 0x0040 stat5_chipseq.rmdup.bam >stat5_chipseq.rmdup.R1.bam
+samtools view -b -f 0x0040 stat5_input.rmdup.bam >stat5_input.rmdup.R1.bam
+
+# Extract the uniquely mapped read
+echo Extract the uniquely mapped read
+samtools view -b -q 1 stat5_chipseq.rmdup.bam >stat5_chipseq.rmdup.unique.bam
+samtools view -b -q 1 stat5_chipseq.rmdup.R1.bam >stat5_chipseq.rmdup.R1.unique.bam
+samtools view -b -q 1 stat5_input.rmdup.bam >stat5_input.rmdup.unique.bam
+samtools view -b -q 1 stat5_input.rmdup.R1.bam >stat5_input.rmdup.R1.unique.bam
+
+# BAM to BED
+bamToBed -i stat5_chipseq.rmdup.unique.bam >stat5_chipseq.rmdup.unique.bed
+bamToBed -i stat5_chipseq.rmdup.R1.unique.bam >stat5_chipseq.rmdup.R1.unique.bed
+bamToBed -i stat5_input.rmdup.unique.bam >stat5_input.rmdup.unique.bed
+bamToBed -i stat5_input.rmdup.R1.unique.bam >stat5_input.rmdup.R1.unique.bed
+
+# MACS peak calling
+echo MACS peak calling
+macs14 -t stat5_chipseq.rmdup.unique.bam -c stat5_input.rmdup.unique.bam -f BAM -g mm -n stat5.pairend.bam -w -S --call-subpeaks
+macs14 -t stat5_chipseq.rmdup.R1.unique.bam -c stat5_input.rmdup.R1.unique.bam -f BAM -g mm -n stat5.R1.bam -w -S --call-subpeaks
+macs14 -t stat5_chipseq.rmdup.unique.bed -c stat5_input.rmdup.unique.bed -f BED -g mm -n stat5.pairend.bed -w -S --call-subpeaks
+macs14 -t stat5_chipseq.rmdup.R1.unique.bed -c stat5_input.rmdup.R1.unique.bed -f BED -g mm -n stat5.R1.bed -w -S --call-subpeaks

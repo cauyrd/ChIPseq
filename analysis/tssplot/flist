@@ -1,0 +1,4 @@
+/home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5_chipseq.rmdup.unique.bam	c	Stat5
+/home/farrarm/shared/riss/ikaros/mapping_peak_calling/primary_cells/ikaros_primary_IP_bothsamples_chipseq.unique.bam	r	Ikaros_primary_B
+/home/farrarm/shared/riss/ikaros/mapping_peak_calling/ikaros_HA_bothsamples_chipseq.unique.bam	g	Ikaros_HAtag
+/home/farrarm/shared/riss/stat5/mapping_peak_calling/stat5_input.rmdup.unique.bam	m	Stat5_input
