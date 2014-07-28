@@ -1,0 +1,37 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=12gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+module load bwa
+module load samtools
+module load picard-tools
+cd $PBS_O_WORKDIR
+data_path='/home/dehms/data_release/umgc/hiseq/140702_SN1073_0384_AC4K0NACXX/Project_Dehm_Project_012'
+reference='/panfs/roc/rissdb/genomes/Homo_sapiens/hg19/bwa/hg19.fa'
+for name in `cat ../sample_list.txt`
+do
+	# bwa-mem mapping
+	bwa mem $reference $data_path/$name"_L006_R1_001.fastq" $data_path/$name"_L006_R2_001.fastq" -M | samtools view -S -b - >$name.pesr.bam
+
+	# extract discordant pairs
+	samtools view -u -F 0x0002 $name.pesr.bam \
+		| samtools view -u -F 0x0100 - \
+		| samtools view -u -F 0x0004 - \
+		| samtools view -u -F 0x0008 - \
+		| samtools view -b -F 0x0400 - \
+		> $name.discordant.pe.bam
+	
+	# extract split reads alignments
+	samtools view -h $name.pesr.bam \
+	| /home/msistaff/yang4414/software/lumpy-sv/scripts/extractSplitReads_BwaMem -i stdin \
+	| samtools view -Sb - \
+	> $name.sr.bam
+
+	# sort both alignment
+	samtools sort $name.discordant.pe.bam $name.discordant.pe.sort
+	samtools sort $name.sr.bam $name.sr.sort
+
+	java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=$name.discordant.pe.sort.bam O=$name.discordant.pe.rmdup.bam M=$name.discordant.pe.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+	java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=$name.sr.sort.bam O=$name.sr.rmdup.bam M=$name.sr.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+done
+

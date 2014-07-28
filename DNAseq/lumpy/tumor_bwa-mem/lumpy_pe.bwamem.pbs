@@ -1,0 +1,10 @@
+#!/bin/bash -l
+#PBS -l walltime=48:00:00,nodes=1:ppn=8,mem=10gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+
+cd $PBS_O_WORKDIR
+module load samtools
+module load bedtools
+module load bamtools
+python run_lumpy_pe.py

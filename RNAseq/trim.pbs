@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -l walltime=8:00:00,nodes=1:ppn=8,pmem=1000mb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+
+module load fastx_toolkit
+path='/home/orrharry/data_release/umgc/hiseq/130227_SN1073_0314_AC1UD0ACXX/Project_Orr_Project_019'
+cd $path
+for name in `ls *12wk_*`
+do
+	fastx_trimmer -t 24 -Q33 -i $name -z -o $PBS_O_WORKDIR/$name.trimed.fastq.gz
+done

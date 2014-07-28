@@ -1,0 +1,18 @@
+#!/bin/bash -l
+#PBS -l walltime=8:00:00,nodes=1:ppn=8,pmem=1000mb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+
+cd $PBS_O_WORKDIR
+for name in `ls *TTAGGC*fastq.gz`
+do
+	seqtk sample -s100 $name 0.17 > $name.subsample.fq
+done
+for name in `ls *ATCACG*fastq.gz`
+do
+	seqtk sample -s100 $name 0.15 > $name.subsample.fq
+done
+for name in `ls *CGATGT*fastq.gz`
+do
+	seqtk sample -s100 $name 0.18 > $name.subsample.fq
+done

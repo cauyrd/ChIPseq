@@ -1,0 +1,74 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+module load fastqc
+
+newgrp orrharry
+
+pwd=/home/orrharry/shared/riss/wk12/fastqc/initial_fastqc
+#Initial fastqc
+#B05 and D30 are Lane 4&5 of 110127_HWUSI-EAS1737_00017_FC_L45 and lane 6 of 110221_HWUSI-EAS1737_00020_FC_L6
+#Lane4 
+cd /home/orrharry/shared/110127_HWUSI-EAS1737_00017_FC_L45/fastq_flt_syn
+#D30
+fastqc L4_R1_ACAGTG.fastq -o $pwd/D30
+fastqc L4_R2_ACAGTG.fastq -o $pwd/D30
+fastqc L4_R1_CGATGT.fastq -o $pwd/D30
+fastqc L4_R2_CGATGT.fastq -o $pwd/D30
+fastqc L4_R1_TGACCA.fastq -o $pwd/D30
+fastqc L4_R2_TGACCA.fastq -o $pwd/D30
+
+#B05
+fastqc L4_R1_CAGATC.fastq -o $pwd/B05
+fastqc L4_R2_CAGATC.fastq -o $pwd/B05
+fastqc L4_R1_GCCAAT.fastq -o $pwd/B05
+fastqc L4_R2_GCCAAT.fastq -o $pwd/B05
+fastqc L4_R1_CTTGTA.fastq -o $pwd/B05
+fastqc L4_R2_CTTGTA.fastq -o $pwd/B05
+
+#Lane5
+#D30
+fastqc L5_R1_ACAGTG.fastq -o $pwd/D30
+fastqc L5_R2_ACAGTG.fastq -o $pwd/D30
+fastqc L5_R1_CGATGT.fastq -o $pwd/D30
+fastqc L5_R2_CGATGT.fastq -o $pwd/D30
+fastqc L5_R1_TGACCA.fastq -o $pwd/D30
+fastqc L5_R2_TGACCA.fastq -o $pwd/D30
+
+#B05
+fastqc L5_R1_CAGATC.fastq -o $pwd/B05
+fastqc L5_R2_CAGATC.fastq -o $pwd/B05
+fastqc L5_R1_GCCAAT.fastq -o $pwd/B05
+fastqc L5_R2_GCCAAT.fastq -o $pwd/B05
+fastqc L5_R1_CTTGTA.fastq -o $pwd/B05
+fastqc L5_R2_CTTGTA.fastq -o $pwd/B05
+
+#Lane6
+cd /home/orrharry/shared/110221_HWUSI-EAS1737_00020_FC_L6/fastq_flt_syn
+#D30
+fastqc L6_R1_ACAGTG.fastq -o $pwd/D30
+fastqc L6_R2_ACAGTG.fastq -o $pwd/D30
+fastqc L6_R1_CGATGT.fastq -o $pwd/D30
+fastqc L6_R2_CGATGT.fastq -o $pwd/D30
+fastqc L6_R1_TGACCA.fastq -o $pwd/D30
+fastqc L6_R2_TGACCA.fastq -o $pwd/D30
+
+#B05
+fastqc L6_R1_CAGATC.fastq -o $pwd/B05
+fastqc L6_R2_CAGATC.fastq -o $pwd/B05
+fastqc L6_R1_GCCAAT.fastq -o $pwd/B05
+fastqc L6_R2_GCCAAT.fastq -o $pwd/B05
+fastqc L6_R1_CTTGTA.fastq -o $pwd/B05
+fastqc L6_R2_CTTGTA.fastq -o $pwd/B05
+
+#FVB are in 110702_HWUSI-EAS1737_00030_FC_L2
+cd /home/orrharry/shared/110702_HWUSI-EAS1737_00030_FC_L2/fastq_flt_syn
+fastqc L2_R1_ATCACG_Orr_009_BLO_03.fastq -o $pwd/FVB
+fastqc L2_R2_ATCACG_Orr_009_BLO_03.fastq -o $pwd/FVB
+fastqc L2_R1_CTTGTA_Orr_009_BLO_02.fastq -o $pwd/FVB
+fastqc L2_R2_CTTGTA_Orr_009_BLO_02.fastq -o $pwd/FVB
+fastqc L2_R1_GGCTAC_Orr_009_BLO_01.fastq -o $pwd/FVB
+fastqc L2_R2_GGCTAC_Orr_009_BLO_01.fastq -o $pwd/FVB

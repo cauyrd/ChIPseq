@@ -1,0 +1,21 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+module load bwa
+module load samtools
+module load picard-tools
+cd $PBS_O_WORKDIR
+data_path='/home/dehms/data_release/umgc/hiseq/140702_SN1073_0384_AC4K0NACXX/Project_Dehm_Project_012'
+reference='/panfs/roc/rissdb/genomes/Homo_sapiens/hg19/bwa/hg19.fa'
+for name in `cat ../sample_list.txt`
+do
+	bwa aln $reference $data_path/$name"_L006_R1_001.fastq" >sample1.sai
+	bwa aln $reference $data_path/$name"_L006_R2_001.fastq" >sample2.sai
+	bwa sampe $reference sample1.sai sample2.sai $data_path/$name"_L006_R1_001.fastq" $data_path/$name"_L006_R2_001.fastq" | samtools view -S -b - >sample.pe.bam
+	samtools sort sample.pe.bam $name.pe.sort
+	samtools index $name.pe.sort.bam
+	java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=$name.pe.sort.bam O=$name.rmdup.pe.bam M=$name.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+done
+rm sample*
+

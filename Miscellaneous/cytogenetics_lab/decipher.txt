@@ -1,0 +1,59 @@
+Query	Patient_ID	Location	Phenotypes	Age_at_Initial_Presentation	Chromosomal_Sex	Mother_is	Father_is	Phenotype_count	Variants_count
+chr2:28469230-28527683	286233	chr2:39192-89050447	-	-	46XY	Of unknown phenotype	Of unknown phenotype	0	2
+chr2:28469230-28527683	282138	chr2:456960-34458875	Intrauterine growth retardation; Micropenis	-	46XY	Of unknown phenotype	Of unknown phenotype	2	2
+chr2:28469230-28527683	256955	chr2:14556998-40512138	-	1	46XX	-	-	0	1
+chr2:28469230-28527683	278594	chr2:21634411-40805194	Intellectual disability, moderate	2	46XY	Of unknown phenotype	Of unknown phenotype	1	1
+chr2:28469230-28527683	260750	chr2:22522338-49734821	Abnormality of the kidney; Intellectual disability; Prenatal short stature	9	46XX	-	-	3	1
+chr2:28469230-28527683	260562	chr2:28522208-29814127	-	-	46XY	-	-	0	1
+chr4:63502684-72360115	259839	chr4:53037890-82241484	-	-	46XX	-	-	0	1
+chr4:63502684-72360115	1572	chr4:56161427-82113957	Abnormality of the eyebrow; Abnormality of the hip bone; Abnormality of toe; Broad nasal tip; Cataract; Delayed skeletal maturation; Depressed nasal bridge; Hearing impairment; Hypertelorism; Intellectual disability; Proportionate short stature; Retinal detachment; Seizures; Self-mutilation; Short phalanx of finger; Single transverse palmar crease; Spotty hyperpigmentation; Strabismus; Thick lower lip vermilion; Thick upper lip vermilion; White forelock ...	24	46XX	-	-	21	1
+chr4:63502684-72360115	269966	chr4:59598915-73753982	-	15	46XX	-	-	0	1
+chr4:63502684-72360115	253155	chr4:61126548-68861149	-	8	46XY	-	-	0	2
+chr4:63502684-72360115	1598	chr4:61131166-75087118	-	54	46XY	-	-	0	1
+chr4:63502684-72360115	249611	chr4:61846996-68099693	Stereotypic behavior	-	-	-	-	1	1
+chr4:63502684-72360115	288886	chr4:62334398-83811097	Intellectual disability	unknown	unknown	-	-	1	1
+chr4:63502684-72360115	288957	chr4:63539103-64007755	Dementia	unknown	unknown	-	-	1	2
+chr4:63502684-72360115	289573	chr4:63607543-64134877	Global developmental delay; Seizures	unknown	46XX	-	-	2	2
+chr4:63502684-72360115	289201	chr4:63607543-64134877	Abnormality of the urethra; Vesicoureteral reflux	unknown	46XX	-	-	2	2
+chr4:63502684-72360115	288089	chr4:63607543-64134877	Autism; Cortical dysplasia; Seizures	unknown	46XY	-	-	3	1
+chr4:63502684-72360115	289106	chr4:63636514-64452880	Cognitive impairment	unknown	unknown	-	-	1	2
+chr4:63502684-72360115	289854	chr4:63636514-64134877	Intellectual disability; Ptosis; Short stature	unknown	46XY	-	-	3	2
+chr4:63502684-72360115	289743	chr4:63636514-64134877	Autism; Intellectual disability	unknown	unknown	-	-	2	3
+chr4:63502684-72360115	288805	chr4:63994089-64103077	Global developmental delay; Periventricular leukomalacia; Seizures	unknown	unknown	-	-	3	1
+chr4:63502684-72360115	265258	chr4:64367628-65211607	-	18	46XY	-	-	0	2
+chr4:63502684-72360115	289788	chr4:64452820-65088519	Hypoparathyroidism	unknown	unknown	-	-	1	2
+chr4:63502684-72360115	250761	chr4:64697456-64708246	Broad nasal tip; Intellectual disability; Prominent ears; Thick lower lip vermilion; Thin upper lip vermilion	unknown	46XY	Unaffected with related or similar phenotype	Unaffected with related or similar phenotype	5	26
+chr4:63502684-72360115	256764	chr4:65381179-65548149	-	unknown	46XX	-	-	0	2
+chr4:63502684-72360115	270816	chr4:65841530-76722496	Abnormality of hair texture; Congenital nystagmus; Delayed eruption of teeth; Delayed speech and language development; Fine hair; Hypermetropia; Hypopigmentation of hair; Intellectual disability; Sparse hair; Strabismus	2	46XY	-	-	10	1
+chr4:63502684-72360115	264324	chr4:67006249-71068535	-	5	46XY	-	-	0	2
+chr4:63502684-72360115	4688	chr4:67129188-74425009	Abnormality of the lower limb; Clinodactyly of the 5th finger; Delayed speech and language development; Intellectual disability; Short stature; Strabismus	11	46XY	-	-	6	1
+chr4:63502684-72360115	254230	chr4:67339298-68403760	-	unknown	46XY	-	-	0	2
+chr4:63502684-72360115	1571	chr4:67367761-82113957	Delayed eruption of teeth; Delayed speech and language development; High palate; Microtia; Proportionate short stature; Strabismus	4	46XX	-	-	6	1
+chr4:63502684-72360115	274369	chr4:68082602-68114956	Autism; Delayed speech and language development; Intellectual disability	unknown	46XY	-	-	3	4
+chr4:63502684-72360115	282768	chr4:68339008-73414477	Autism spectrum disorder; Global developmental delay; Truncal obesity	6	46XY	Unaffected with related or similar phenotype	Unaffected with related or similar phenotype	3	1
+chr4:63502684-72360115	290545	chr4:68606402-68974716	Autism spectrum disorder	10	46XY	Of unknown phenotype	Of unknown phenotype	1	1
+chr4:63502684-72360115	270238	chr4:69276397-69536061	Attention deficit hyperactivity disorder	8	46XY	Unaffected with related or similar phenotype	Unaffected with related or similar phenotype	1	1
+chr4:63502684-72360115	1988	chr4:69297701-69467710	-	unknown	46XX	-	-	0	70
+chr4:63502684-72360115	1985	chr4:69297701-69467710	-	unknown	46XX	-	-	0	75
+chr4:63502684-72360115	1617	chr4:69297701-69467710	Clinodactyly of the 5th finger; Delayed speech and language development; Fine hair; High anterior hairline; Microcephaly; Prominent ears; Tapered finger	2	46XX	Affected with related or similar phenotype	Affected with related or similar phenotype	7	114
+chr4:63502684-72360115	282314	chr4:69375139-69483277	Short 1st metacarpal; Short distal phalanx of hallux; Short distal phalanx of the 2nd finger; Short distal phalanx of the thumb; Short distal phalanx of toe; Short first metatarsal	22	46XY	Unaffected with related or similar phenotype	Unaffected with related or similar phenotype	6	6
+chr4:63502684-72360115	257084	chr4:69661399-70720400	Epileptic spasms; Feeding difficulties in infancy; Hypsarrhythmia; Intellectual disability; Muscular hypotonia; Myoclonus	3	46XY	-	-	6	2
+chr4:63502684-72360115	1989	chr4:69929700-70268089	-	unknown	46XX	-	-	0	96
+chr4:63502684-72360115	288016	chr4:70148584-71091305	Areflexia; Infantile axial hypotonia; Motor delay	unknown	46XY	-	-	3	2
+chr4:63502684-72360115	2691	chr4:70153864-70230159	Intellectual disability	unknown	46XX	-	-	1	60
+chr4:63502684-72360115	288329	chr4:70324492-70667852	Autism; Hyperreflexia	unknown	46XY	-	-	2	4
+chr4:63502684-72360115	288740	chr4:70434738-71511275	Attention deficit hyperactivity disorder; Inappropriate behavior; Intellectual disability, borderline	unknown	46XX	-	-	3	1
+chr4:63502684-72360115	288154	chr4:70434738-71507828	Behavioural/Psychiatric Abnormality; Intellectual disability	unknown	46XY	-	-	2	1
+chr4:63502684-72360115	265023	chr4:70618493-70885454	Hyperactivity; Intellectual disability	6	46XY	-	-	2	1
+chr4:63502684-72360115	272891	chr4:70685482-70969807	-	5	46XY	-	-	0	1
+chr4:63502684-72360115	276359	chr4:71110552-71275265	-	-	46XX	-	-	0	2
+chr4:63502684-72360115	274688	chr4:71161197-71281554	Broad thumb; Cleft palate; Defect in the atrial septum; Delayed puberty; Generalized seizures; Hearing impairment; Microcephaly; Micrognathia; Moderate global developmental delay; Moderately short stature; Patent ductus arteriosus after birth at term; Pear-shaped nose; Polyarticular arthritis; Pulmonic stenosis; Pyloric stenosis	29	46XX	-	-	15	2
+chr4:63502684-72360115	288333	chr4:71162795-71251505	Aortic valve stenosis	unknown	46XY	-	-	1	2
+chr4:63502684-72360115	288020	chr4:71162795-71251505	; Abnormality of the foot; Microcephaly; Pectus excavatum; Preaxial polydactyly of foot; Psychomotor deterioration	unknown	46XX	-	-	7	3
+chr4:63502684-72360115	287075	chr4:71162797-71339819	Autism spectrum disorder	14	46XX	Of unknown phenotype	Of unknown phenotype	1	2
+chr4:63502684-72360115	256067	chr4:71201901-71275324	-	2	46XX	-	-	0	1
+chr4:63502684-72360115	263571	chr4:71201901-71275265	-	1	46XX	-	-	0	1
+chr4:63502684-72360115	2127	chr4:71593549-72906070	Abnormality of the face; Delayed speech and language development; High palate; Intellectual disability; Macrodontia; Myopia; Nystagmus; Pes cavus; Small feet; Tapered finger	19	46XX	-	-	10	2
+chr4:63502684-72360115	1599	chr4:71660501-89588610	-	5	46XX	-	-	0	1
+chr4:63502684-72360115	271532	chr4:72006445-76140123	Intellectual disability	15	46XX	-	-	1	2
+chr4:63502684-72360115	268466	chr4:72255930-81180120	Autism; Proportionate short stature	6	46XY	-	-	2	2

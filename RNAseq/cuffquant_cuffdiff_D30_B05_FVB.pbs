@@ -1,0 +1,51 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+module load cufflinks
+
+newgrp orrharry 
+
+#Cuffquant on all 9 samples
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/D30_CGATGT_rep1
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb D30_rep1_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/D30_TGACCA_rep2
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb D30_rep2_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/D30_ACAGTG_rep3
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb D30_rep3_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/B05_GCCAAT_rep1
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb B05_rep1_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/B05_CAGATC_rep2
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb B05_rep2_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/B05_CTTGTA_rep3
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb B05_rep3_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/FVB_ATCACG_rep1
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb FVB_rep1_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/FVB_GGCTAC_rep2
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb FVB_rep2_abundances.cxb
+
+cd /home/orrharry/shared/riss/wk12/tophat_cuffdiff/FVB_CTTGTA_rep3
+cuffquant -p 4 -b /panfs/roc/rissdb/genomes/Mus_musculus/mm10_canonical/bowtie2/mm10_canonical.fa -u /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf accepted_hits.bam
+mv abundances.cxb FVB_rep3_abundances.cxb
+
+cd $PBS_O_WORKDIR
+#Cuffdiff
+cuffdiff -p 4 -o cuffdiff_output -L D30,B05,FVB /panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-current/Genes/genes.gtf D30_CGATGT_rep1/D30_rep1_abundances.cxb,D30_TGACCA_rep2/D30_rep2_abundances.cxb,D30_ACAGTG_rep3/D30_rep3_abundances.cxb B05_GCCAAT_rep1/B05_rep1_abundances.cxb,B05_CAGATC_rep2/B05_rep2_abundances.cxb,B05_CTTGTA_rep3/B05_rep3_abundances.cxb FVB_ATCACG_rep1/FVB_rep1_abundances.cxb,FVB_GGCTAC_rep2/FVB_rep2_abundances.cxb,FBV_CTTGTA_rep3/FVB_rep3_abundances.cxb
+

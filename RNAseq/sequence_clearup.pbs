@@ -1,0 +1,219 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+pwd=/home/orrharry/shared/riss/wk12/sample_cleanup
+
+module load riss_util
+module load trimmomatic
+module load fastqc
+
+cd /home/orrharry/shared/110127_HWUSI-EAS1737_00017_FC_L45/fastq_flt_syn
+#Lane4
+#D30
+pe-sync-2-files.pl L4_R1_ACAGTG.fastq L4_R2_ACAGTG.fastq 
+pe-sync-2-files.pl L4_R1_CGATGT.fastq L4_R2_CGATGT.fastq
+pe-sync-2-files.pl L4_R1_TGACCA.fastq L4_R2_TGACCA.fastq
+
+#B05
+pe-sync-2-files.pl L4_R1_CAGATC.fastq L4_R2_CAGATC.fastq
+pe-sync-2-files.pl L4_R1_GCCAAT.fastq L4_R2_GCCAAT.fastq 
+pe-sync-2-files.pl L4_R1_CTTGTA.fastq L4_R2_CTTGTA.fastq
+
+#Lane5
+#D30
+pe-sync-2-files.pl L5_R1_ACAGTG.fastq L5_R2_ACAGTG.fastq 
+pe-sync-2-files.pl L5_R1_CGATGT.fastq L5_R2_CGATGT.fastq 
+pe-sync-2-files.pl L5_R1_TGACCA.fastq L5_R2_TGACCA.fastq 
+
+#B05
+pe-sync-2-files.pl L5_R1_CAGATC.fastq L5_R2_CAGATC.fastq 
+pe-sync-2-files.pl L5_R1_GCCAAT.fastq L5_R2_GCCAAT.fastq 
+pe-sync-2-files.pl L5_R1_CTTGTA.fastq L5_R1_CTTGTA.fastq
+
+#Lane6
+cd /home/orrharry/shared/110221_HWUSI-EAS1737_00020_FC_L6/fastq_flt_syn
+#D30
+pe-sync-2-files.pl L6_R1_ACAGTG.fastq L6_R2_ACAGTG.fastq 
+pe-sync-2-files.pl L6_R1_CGATGT.fastq L6_R2_CGATGT.fastq 
+pe-sync-2-files.pl L6_R1_TGACCA.fastq L6_R2_TGACCA.fastq 
+
+#B05
+pe-sync-2-files.pl L6_R1_CAGATC.fastq L6_R2_CAGATC.fastq 
+pe-sync-2-files.pl L6_R1_GCCAAT.fastq L6_R2_GCCAAT.fastq 
+pe-sync-2-files.pl L6_R1_CTTGTA.fastq L6_R2_CTTGTA.fastq 
+
+#FVB are in 110702_HWUSI-EAS1737_00030_FC_L2
+cd /home/orrharry/shared/110702_HWUSI-EAS1737_00030_FC_L2/fastq_flt_syn
+pe-sync-2-files.pl L2_R1_ATCACG_Orr_009_BLO_03.fastq L2_R2_ATCACG_Orr_009_BLO_03.fastq 
+pe-sync-2-files.pl L2_R1_CTTGTA_Orr_009_BLO_02.fastq L2_R2_CTTGTA_Orr_009_BLO_02.fastq 
+pe-sync-2-files.pl L2_R1_GGCTAC_Orr_009_BLO_01.fastq L2_R2_GGCTAC_Orr_009_BLO_01.fastq 
+
+#Trimming
+cd /home/orrharry/shared/110127_HWUSI-EAS1737_00017_FC_L45/fastq_flt_syn
+#Lane4 
+#D30
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L4_R1_ACAGTG.fastq L4_R2_ACAGTG.fastq $pwd/L4_R1_ACAGTG_trimmed_paired.fastq $pwd/L4_R1_ACAGTG_trimmed_single.fastq $pwd/L4_R2_ACAGTG_trimmed_paired.fastq $pwd/L4_R2_ACAGTG_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L4_R1_TGACCA.fastq L4_R2_TGACCA.fastq $pwd/L4_R1_TGACCA_trimmed_paired.fastq $pwd/L4_R1_TGACCA_trimmed_single.fastq $pwd/L4_R2_TGACCA_trimmed_paired.fastq $pwd/L4_R2_TGACCA_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L4_R1_CGATGT.fastq L4_R2_CGATGT.fastq $pwd/L4_R1_CGATGT_trimmed_paired.fastq $pwd/L4_R1_CGATGT_trimmed_single.fastq $pwd/L4_R2_CGATGT_trimmed_paired.fastq $pwd/L4_R2_CGATGT_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+
+#B05
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L4_R1_GCCAAT.fastq L4_R2_GCCAAT.fastq $pwd/L4_R1_GCCAAT_trimmed_paired.fastq $pwd/L4_R1_GCCAAT_trimmed_single.fastq $pwd/L4_R2_GCCAAT_trimmed_paired.fastq $pwd/L4_R2_GCCAAT_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L4_R1_CAGATC.fastq L4_R2_CAGATC.fastq $pwd/L4_R1_CAGATC_trimmed_paired.fastq $pwd/L4_R1_CAGATC_trimmed_single.fastq $pwd/L4_R2_CAGATC_trimmed_paired.fastq $pwd/L4_R2_CAGATC_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L4_R1_CTTGTA.fastq L4_R2_CTTGTA.fastq $pwd/L4_R1_CTTGTA_trimmed_paired.fastq $pwd/L4_R1_CTTGTA_trimmed_single.fastq $pwd/L4_R2_CTTGTA_trimmed_paired.fastq $pwd/L4_R2_CTTGTA_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+
+#Lane5 
+#D30
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L5_R1_ACAGTG.fastq L5_R2_ACAGTG.fastq $pwd/L5_R1_ACAGTG_trimmed_paired.fastq $pwd/L5_R1_ACAGTG_trimmed_single.fastq $pwd/L5_R2_ACAGTG_trimmed_paired.fastq $pwd/L5_R2_ACAGTG_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L5_R1_TGACCA.fastq L5_R2_TGACCA.fastq $pwd/L5_R1_TGACCA_trimmed_paired.fastq $pwd/L5_R1_TGACCA_trimmed_single.fastq $pwd/L5_R2_TGACCA_trimmed_paired.fastq $pwd/L5_R2_TGACCA_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L5_R1_CGATGT.fastq L5_R2_CGATGT.fastq $pwd/L5_R1_CGATGT_trimmed_paired.fastq $pwd/L5_R1_CGATGT_trimmed_single.fastq $pwd/L5_R2_CGATGT_trimmed_paired.fastq $pwd/L5_R2_CGATGT_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+
+#B05
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L5_R1_GCCAAT.fastq L5_R2_GCCAAT.fastq $pwd/L5_R1_GCCAAT_trimmed_paired.fastq $pwd/L5_R1_GCCAAT_trimmed_single.fastq $pwd/L5_R2_GCCAAT_trimmed_paired.fastq $pwd/L5_R2_GCCAAT_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L5_R1_CAGATC.fastq L5_R2_CAGATC.fastq $pwd/L5_R1_CAGATC_trimmed_paired.fastq $pwd/L5_R1_CAGATC_trimmed_single.fastq $pwd/L5_R2_CAGATC_trimmed_paired.fastq $pwd/L5_R2_CAGATC_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L5_R1_CTTGTA.fastq L5_R2_CTTGTA.fastq $pwd/L5_R1_CTTGTA_trimmed_paired.fastq $pwd/L5_R1_CTTGTA_trimmed_single.fastq $pwd/L5_R2_CTTGTA_trimmed_paired.fastq $pwd/L5_R2_CTTGTA_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+
+#Lane6
+cd /home/orrharry/shared/110221_HWUSI-EAS1737_00020_FC_L6/fastq_flt_syn
+#D30
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L6_R1_ACAGTG.fastq L6_R2_ACAGTG.fastq $pwd/L6_R1_ACAGTG_trimmed_paired.fastq $pwd/L6_R1_ACAGTG_trimmed_single.fastq $pwd/L6_R2_ACAGTG_trimmed_paired.fastq $pwd/L6_R2_ACAGTG_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L6_R1_TGACCA.fastq L6_R2_TGACCA.fastq $pwd/L6_R1_TGACCA_trimmed_paired.fastq $pwd/L6_R1_TGACCA_trimmed_single.fastq $pwd/L6_R2_TGACCA_trimmed_paired.fastq $pwd/L6_R2_TGACCA_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L6_R1_CGATGT.fastq L6_R2_CGATGT.fastq $pwd/L6_R1_CGATGT_trimmed_paired.fastq $pwd/L6_R1_CGATGT_trimmed_single.fastq $pwd/L6_R2_CGATGT_trimmed_paired.fastq $pwd/L6_R2_CGATGT_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+
+#B05
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L6_R1_GCCAAT.fastq L6_R2_GCCAAT.fastq $pwd/L6_R1_GCCAAT_trimmed_paired.fastq $pwd/L6_R1_GCCAAT_trimmed_single.fastq $pwd/L6_R2_GCCAAT_trimmed_paired.fastq $pwd/L6_R2_GCCAAT_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L6_R1_CAGATC.fastq L6_R2_CAGATC.fastq $pwd/L6_R1_CAGATC_trimmed_paired.fastq $pwd/L6_R1_CAGATC_trimmed_single.fastq $pwd/L6_R2_CAGATC_trimmed_paired.fastq $pwd/L6_R2_CAGATC_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred64 L6_R1_CTTGTA.fastq L6_R2_CTTGTA.fastq $pwd/L6_R1_CTTGTA_trimmed_paired.fastq $pwd/L6_R1_CTTGTA_trimmed_single.fastq $pwd/L6_R2_CTTGTA_trimmed_paired.fastq $pwd/L6_R2_CTTGTA_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50 TOPHRED33
+
+
+#Normal mice
+#FVB
+cd /home/orrharry/shared/110702_HWUSI-EAS1737_00030_FC_L2/fastq_flt_syn
+
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred33 L2_R1_ATCACG_Orr_009_BLO_03.fastq L2_R2_ATCACG_Orr_009_BLO_03.fastq $pwd/L2_R1_ATCACG_Orr_009_BLO_03_trimmed_paired.fastq $pwd/L2_R1_ATCACG_Orr_009_BLO_03_trimmed_single.fastq $pwd/L2_R2_ATCACG_Orr_009_BLO_03_trimmed_paired.fastq $pwd/L2_R2_ATCACG_Orr_009_BLO_03_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred33 L2_R1_CTTGTA_Orr_009_BLO_02.fastq L2_R2_CTTGTA_Orr_009_BLO_02.fastq $pwd/L2_R1_CTTGTA_Orr_009_BLO_02_trimmed_paired.fastq $pwd/L2_R1_CTTGTA_Orr_009_BLO_02_trimmed_single.fastq $pwd/L2_R2_CTTGTA_Orr_009_BLO_02_trimmed_paired.fastq $pwd/L2_R2_CTTGTA_Orr_009_BLO_02_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
+java -Xmx2g -jar $CLASSPATH/trimmomatic.jar PE -phred33 L2_R1_GGCTAC_Orr_009_BLO_01.fastq L2_R2_GGCTAC_Orr_009_BLO_01.fastq $pwd/L2_R1_GGCTAC_Orr_009_BLO_01_trimmed_paired.fastq $pwd/L2_R1_GGCTAC_Orr_009_BLO_01_trimmed_single.fastq $pwd/L2_R2_GGCTAC_Orr_009_BLO_01_trimmed_paired.fastq $pwd/L2_R2_GGCTAC_Orr_009_BLO_01_trimmed_single.fastq ILLUMINACLIP:/soft/trimmomatic/0.32/adapters/TruSeq2-PE.fa:2:30:10 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
+
+cd $pwd
+pwd2=/home/orrharry/shared/riss/wk12/fastqc/post_cleanup_fastqc
+#Land4
+#D30
+fastqc L4_R1_ACAGTG_trimmed_paired.fastq -o $pwd2/D30
+fastqc L4_R2_ACAGTG_trimmed_paired.fastq -o $pwd2/D30
+fastqc L4_R1_CGATGT_trimmed_paired.fastq -o $pwd2/D30
+fastqc L4_R2_CGATGT_trimmed_paired.fastq -o $pwd2/D30
+fastqc L4_R1_TGACCA_trimmed_paired.fastq -o $pwd2/D30
+fastqc L4_R2_TGACCA_trimmed_paired.fastq -o $pwd2/D30
+
+#B05
+fastqc L4_R1_CAGATC_trimmed_paired.fastq -o $pwd2/B05
+fastqc L4_R2_CAGATC_trimmed_paired.fastq -o $pwd2/B05
+fastqc L4_R1_GCCAAT_trimmed_paired.fastq -o $pwd2/B05
+fastqc L4_R2_GCCAAT_trimmed_paired.fastq -o $pwd2/B05
+fastqc L4_R1_CTTGTA_trimmed_paired.fastq -o $pwd2/B05
+fastqc L4_R2_CTTGTA_trimmed_paired.fastq -o $pwd2/B05
+
+#Lane5
+#D30
+fastqc L5_R1_ACAGTG_trimmed_paired.fastq -o $pwd2/D30
+fastqc L5_R2_ACAGTG_trimmed_paired.fastq -o $pwd2/D30
+fastqc L5_R1_CGATGT_trimmed_paired.fastq -o $pwd2/D30
+fastqc L5_R2_CGATGT_trimmed_paired.fastq -o $pwd2/D30
+fastqc L5_R1_TGACCA_trimmed_paired.fastq -o $pwd2/D30
+fastqc L5_R2_TGACCA_trimmed_paired.fastq -o $pwd2/D30
+
+#B05
+fastqc L5_R1_CAGATC_trimmed_paired.fastq -o $pwd2/B05
+fastqc L5_R2_CAGATC_trimmed_paired.fastq -o $pwd2/B05
+fastqc L5_R1_GCCAAT_trimmed_paired.fastq -o $pwd2/B05
+fastqc L5_R2_GCCAAT_trimmed_paired.fastq -o $pwd2/B05
+fastqc L5_R1_CTTGTA_trimmed_paired.fastq -o $pwd2/B05
+fastqc L5_R2_CTTGTA_trimmed_paired.fastq -o $pwd2/B05
+
+#Lane6
+#D30
+fastqc L6_R1_ACAGTG_trimmed_paired.fastq -o $pwd2/D30
+fastqc L6_R2_ACAGTG_trimmed_paired.fastq -o $pwd2/D30
+fastqc L6_R1_CGATGT_trimmed_paired.fastq -o $pwd2/D30
+fastqc L6_R2_CGATGT_trimmed_paired.fastq -o $pwd2/D30
+fastqc L6_R1_TGACCA_trimmed_paired.fastq -o $pwd2/D30
+fastqc L6_R2_TGACCA_trimmed_paired.fastq -o $pwd2/D30
+
+#B05
+fastqc L6_R1_CAGATC_trimmed_paired.fastq -o $pwd2/B05
+fastqc L6_R2_CAGATC_trimmed_paired.fastq -o $pwd2/B05
+fastqc L6_R1_GCCAAT_trimmed_paired.fastq -o $pwd2/B05
+fastqc L6_R2_GCCAAT_trimmed_paired.fastq -o $pwd2/B05
+fastqc L6_R1_CTTGTA_trimmed_paired.fastq -o $pwd2/B05
+fastqc L6_R2_CTTGTA_trimmed_paired.fastq -o $pwd2/B05
+
+#FVB are in 110702_HWUSI-EAS1737_00030_FC_L2
+fastqc L2_R1_ATCACG_Orr_009_BLO_03_trimmed_paired.fastq -o $pwd2/FVB
+fastqc L2_R2_ATCACG_Orr_009_BLO_03_trimmed_paired.fastq -o $pwd2/FVB
+fastqc L2_R1_CTTGTA_Orr_009_BLO_02_trimmed_paired.fastq -o $pwd2/FVB
+fastqc L2_R2_CTTGTA_Orr_009_BLO_02_trimmed_paired.fastq -o $pwd2/FVB
+fastqc L2_R1_GGCTAC_Orr_009_BLO_01_trimmed_paired.fastq -o $pwd2/FVB
+fastqc L2_R2_GGCTAC_Orr_009_BLO_01_trimmed_paired.fastq -o $pwd2/FVB
+
+#single-end
+#Land4
+#D30
+fastqc L4_R1_ACAGTG_trimmed_single.fastq -o $pwd2/D30
+fastqc L4_R2_ACAGTG_trimmed_single.fastq -o $pwd2/D30
+fastqc L4_R1_CGATGT_trimmed_single.fastq -o $pwd2/D30
+fastqc L4_R2_CGATGT_trimmed_single.fastq -o $pwd2/D30
+fastqc L4_R1_TGACCA_trimmed_single.fastq -o $pwd2/D30
+fastqc L4_R2_TGACCA_trimmed_single.fastq -o $pwd2/D30
+
+#B05
+fastqc L4_R1_CAGATC_trimmed_single.fastq -o $pwd2/B05
+fastqc L4_R2_CAGATC_trimmed_single.fastq -o $pwd2/B05
+fastqc L4_R1_GCCAAT_trimmed_single.fastq -o $pwd2/B05
+fastqc L4_R2_GCCAAT_trimmed_single.fastq -o $pwd2/B05
+fastqc L4_R1_CTTGTA_trimmed_single.fastq -o $pwd2/B05
+fastqc L4_R2_CTTGTA_trimmed_single.fastq -o $pwd2/B05
+
+#Lane5
+#D30
+fastqc L5_R1_ACAGTG_trimmed_single.fastq -o $pwd2/D30
+fastqc L5_R2_ACAGTG_trimmed_single.fastq -o $pwd2/D30
+fastqc L5_R1_CGATGT_trimmed_single.fastq -o $pwd2/D30
+fastqc L5_R2_CGATGT_trimmed_single.fastq -o $pwd2/D30
+fastqc L5_R1_TGACCA_trimmed_single.fastq -o $pwd2/D30
+fastqc L5_R2_TGACCA_trimmed_single.fastq -o $pwd2/D30
+
+#B05
+fastqc L5_R1_CAGATC_trimmed_single.fastq -o $pwd2/B05
+fastqc L5_R2_CAGATC_trimmed_single.fastq -o $pwd2/B05
+fastqc L5_R1_GCCAAT_trimmed_single.fastq -o $pwd2/B05
+fastqc L5_R2_GCCAAT_trimmed_single.fastq -o $pwd2/B05
+fastqc L5_R1_CTTGTA_trimmed_single.fastq -o $pwd2/B05
+fastqc L5_R2_CTTGTA_trimmed_single.fastq -o $pwd2/B05
+
+#Lane6
+#D30
+fastqc L6_R1_ACAGTG_trimmed_single.fastq -o $pwd2/D30
+fastqc L6_R2_ACAGTG_trimmed_single.fastq -o $pwd2/D30
+fastqc L6_R1_CGATGT_trimmed_single.fastq -o $pwd2/D30
+fastqc L6_R2_CGATGT_trimmed_single.fastq -o $pwd2/D30
+fastqc L6_R1_TGACCA_trimmed_single.fastq -o $pwd2/D30
+fastqc L6_R2_TGACCA_trimmed_single.fastq -o $pwd2/D30
+
+#B05
+fastqc L6_R1_CAGATC_trimmed_single.fastq -o $pwd2/B05
+fastqc L6_R2_CAGATC_trimmed_single.fastq -o $pwd2/B05
+fastqc L6_R1_GCCAAT_trimmed_single.fastq -o $pwd2/B05
+fastqc L6_R2_GCCAAT_trimmed_single.fastq -o $pwd2/B05
+fastqc L6_R1_CTTGTA_trimmed_single.fastq -o $pwd2/B05
+fastqc L6_R2_CTTGTA_trimmed_single.fastq -o $pwd2/B05
+
+#FVB are in 110702_HWUSI-EAS1737_00030_FC_L2
+fastqc L2_R1_ATCACG_Orr_009_BLO_03_trimmed_single.fastq -o $pwd2/FVB
+fastqc L2_R2_ATCACG_Orr_009_BLO_03_trimmed_single.fastq -o $pwd2/FVB
+fastqc L2_R1_CTTGTA_Orr_009_BLO_02_trimmed_single.fastq -o $pwd2/FVB
+fastqc L2_R2_CTTGTA_Orr_009_BLO_02_trimmed_single.fastq -o $pwd2/FVB
+fastqc L2_R1_GGCTAC_Orr_009_BLO_01_trimmed_single.fastq -o $pwd2/FVB
+fastqc L2_R2_GGCTAC_Orr_009_BLO_01_trimmed_single.fastq -o $pwd2/FVB
+
