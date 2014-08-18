@@ -151,14 +151,14 @@ def main():
 		os.system('freebayes --pooled-discrete -F '+str(freebayes_f)+' -f '+reference['freebayes']+' '+blat_input+'.blat.bam | vcfallelicprimitives -k -g | vt normalize -r '+reference['freebayes']+' - >'+each+'.raw.vcf')
 		os.system('vcffilter -f "( LEN > '+str(indel_len-1)+' & TYPE = ins & DP > '+str(depth)+' ) | ( LEN > '+str(indel_len-1)+' & TYPE = del & DP > '+str(depth)+' ) | ( LEN > '+str(indel_len-1)+' & TYPE = complex & DP > '+str(depth)+' )" '+each+'.raw.vcf >'+each+'.indel.vcf')
 		os.system('vcffilter -f "! ( TYPE = ins ) & ! ( TYPE = del ) & ! ( TYPE = complex ) & DP > '+str(depth)+'" '+each+'.raw.vcf >'+each+'.snp.vcf')
-		#os.remove(each+'.raw.vcf')
+		os.remove(each+'.raw.vcf')
 
 		# filter the indel and snps that reside in the regions from  a BED file if provided by -r parameter.
 		if bedfile:
 			os.system('intersectBed -a '+each+'.indel.vcf -b '+bedfile+' -wa -header -u >'+each+'.indel.exon.vcf')
 			os.system('intersectBed -a '+each+'.snp.vcf -b '+bedfile+' -wa -header -u >'+each+'.snp.exon.vcf')
-		#	os.remove(each+'.indel.vcf')
-		#	os.remove(each+'.snp.vcf')
+			os.remove(each+'.indel.vcf')
+			os.remove(each+'.snp.vcf')
 		
 		# post filtering SNPs based on calculated VAF.
 		if bedfile:
@@ -179,10 +179,10 @@ def main():
 						print >> ofp, line.rstrip()
 		ifp.close()
 		ofp.close()
-		#if bedfile:
-		#	os.system('mv '+each+'.snp.exon.filtered.vcf '+each+'.snp.exon.vcf')
-		#else:
-		#	os.system('mv '+each+'.snp.filtered.vcf '+each+'.snp.vcf')
+		if bedfile:
+			os.system('mv '+each+'.snp.exon.filtered.vcf '+each+'.snp.exon.vcf')
+		else:
+			os.system('mv '+each+'.snp.filtered.vcf '+each+'.snp.vcf')
 
 	print "Cleanup sever"
 	os.system('gfServer stop localhost 50000')
