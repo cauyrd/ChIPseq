@@ -1,0 +1,75 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=12gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+# need to chage date_path, bwa-mem input file name, read length in lumpy.
+module load bwa
+module load samtools
+module load picard-tools
+module load igv
+cd $PBS_O_WORKDIR
+data_path='/home/dehms/data_release/umgc/hiseq/141113_700506R_0401_BHB1V3ADXX/Project_Dehm_Project_014'
+reference='/panfs/roc/rissdb/genomes/Homo_sapiens/hg19/bwa/hg19.fa'
+for name in `cat ../sample_list.txt`
+do
+	# bwa-mem mapping
+	bwa mem $reference $data_path/$name"_L002_R1_001.fastq" $data_path/$name"_L002_R2_001.fastq" -M | samtools view -S -b - >$name.pesr.bam
+	samtools view -bq 20 $name.pesr.bam > $name.pesr.unique.bam
+	samtools sort $name.pesr.unique.bam $name.pesr.unique.sort
+	rm $name.pesr.bam $name.pesr.unique.bam
+	# remove duplicate reads
+	java -Xmx2g -jar $CLASSPATH/MarkDuplicates.jar I=$name.pesr.unique.sort.bam O=$name.pesr.unique.rmdup.bam M=$name.pesr.unique.rmdup.txt REMOVE_DUPLICATES=true AS=true VALIDATION_STRINGENCY=LENIENT
+	rm $name.pesr.unique.sort.bam
+	samtools index $name.pesr.unique.rmdup.bam
+	igvtools count -z 5 -w 25 -e 250 $name.pesr.unique.rmdup.bam $name.cov.tdf hg19
+	# extract discordant pairs
+	samtools view -u -F 0x0002 $name.pesr.unique.rmdup.bam \
+		| samtools view -u -F 0x0100 - \
+		| samtools view -u -F 0x0004 - \
+		| samtools view -u -F 0x0008 - \
+		| samtools view -b -F 0x0400 - \
+		> $name.discordant.pe.bam
+	samtools sort $name.discordant.pe.bam $name.discordant.pe.sort
+	samtools index $name.discordant.pe.sort.bam
+	rm $name.discordant.pe.bam
+	
+	# extract split reads
+	samtools view -h $name.pesr.unique.rmdup.bam \
+		| ~/software/lumpy-sv/scripts/extractSplitReads_BwaMem -i stdin \
+		| samtools view -Sb - \
+		> $name.sr.bam
+	samtools sort $name.sr.bam $name.sr.sort
+	samtools index $name.sr.sort.bam
+	rm $name.sr.bam
+	
+
+	# run lumpy for both pairend and split reads
+	samtools view $name.pesr.unique.rmdup.bam|tail -n+5000|pairend_distro.pl -rl 101 -X 4 -N 5000 -o $name.pe.histo
+	lumpy -mw 4 -tt 0.0 -pe bam_file:$name.discordant.pe.sort.bam,histo_file:$name.pe.histo,mean:300,stdev:50,read_length:150,min_non_overlap:150,discordant_z:4,back_distance:20,weight:1,id:1,min_mapping_threshold:20  -sr bam_file:$name.sr.sort.bam,back_distance:20,weight:1,id:2,min_mapping_threshold:20 > $name.pesr.bedpe
+	python filter_lumpy_to_have_AR.py $name
+	rm $name.pesr.bedpe
+
+	# run delly 
+	delly -t DEL -o $name.del.vcf -g $reference $name.pesr.unique.rmdup.bam
+	delly -t TRA -o $name.tra.vcf -g $reference $name.pesr.unique.rmdup.bam
+	delly -t DUP -o $name.dup.vcf -g $reference $name.pesr.unique.rmdup.bam
+	delly -t INV -o $name.inv.vcf -g $reference $name.pesr.unique.rmdup.bam
+	python filter_delly_to_have_AR.py $name
+
+	# merge lumpy and delly
+	cut -f1-3,7- $name.tier2.lumpy.pesr.bedpe > lumpy1.bed
+	slopBed -i lumpy1.bed -b 1000 -g /home/msistaff/yang4414/Genome_file/hg19.chrom.sizes >lumpy1e.bed
+	cut -f1-3,7- $name.delly.bedpe >delly1.bed
+	slopBed -i delly1.bed -b 1000 -g /home/msistaff/yang4414/Genome_file/hg19.chrom.sizes >delly1e.bed
+	cut -f4-6,7- $name.tier2.lumpy.pesr.bedpe > lumpy2.bed
+	slopBed -i lumpy2.bed -b 1000 -g /home/msistaff/yang4414/Genome_file/hg19.chrom.sizes >lumpy2e.bed
+	cut -f4-6,7- $name.delly.bedpe >delly2.bed
+	slopBed -i delly2.bed -b 1000 -g /home/msistaff/yang4414/Genome_file/hg19.chrom.sizes >delly2e.bed
+	intersectBed -a lumpy1e.bed -b delly1e.bed -wa -wb > lumpy_delly1.bed
+	intersectBed -a lumpy2e.bed -b delly2e.bed -wa -wb > lumpy_delly2.bed
+	awk '{if ($8==$17) print}' lumpy_delly1.bed > merge1.bed
+	awk '{if ($8==$17) print}' lumpy_delly2.bed > merge2.bed
+	python compare_lumpy_with_delly.py $name
+	python bedpe2igv.py $name
+	rm lumpy*.bed delly*.bed merge*.bed
+done

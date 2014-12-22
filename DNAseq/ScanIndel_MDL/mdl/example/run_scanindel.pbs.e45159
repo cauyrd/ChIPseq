@@ -1,0 +1,298 @@
+[M::main_mem] read 398704 sequences (57466661 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (0, 178890, 3, 0)
+[M::mem_pestat] skip orientation FF as there are not enough pairs
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
+[M::mem_pestat] (25, 50, 75) percentile: (186, 192, 197)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (164, 219)
+[M::mem_pestat] mean and std.dev: (190.14, 8.23)
+[M::mem_pestat] low and high boundaries for proper pairs: (153, 230)
+[M::mem_pestat] skip orientation RF as there are not enough pairs
+[M::mem_pestat] skip orientation RR as there are not enough pairs
+[M::mem_process_seqs] Processed 398704 reads in 86.557 CPU sec, 15.715 real sec
+[main] Version: 0.7.10-r789
+[main] CMD: bwa mem -M -t8 /panfs/roc/rissdb/genomes/Homo_sapiens/hg19/bwa/hg19.fa sub_r1_trimmed.fq sub_r2_trimmed.fq
+[main] Real time: 102.546 sec; CPU: 117.014 sec
+[samopen] SAM header is present: 93 sequences.
+/home/msistaff/yang4414/software/epd-7.3-2-rh5-x86_64/lib/python2.7/site-packages/Bio/SearchIO/__init__.py:213: BiopythonExperimentalWarning: Bio.SearchIO is an experimental submodule which may undergo significant changes prior to its future official release.
+  BiopythonExperimentalWarning)
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43803519..43803597
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43803769..43803901
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43804212..43804390
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43804941..43805239
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43805634..43805796
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43806057..43806183
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43812115..43812299
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43812462..43812604
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43814513..43814672
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43814933..43815029
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43817886..43817973
+WARNING(freebayes): Could not find any mapped reads in target region chr1:43818188..43818442
+WARNING(freebayes): Could not find any mapped reads in target region chr1:115251155..115251274
+WARNING(freebayes): Could not find any mapped reads in target region chr1:115252189..115252348
+normalize v0.5
+
+options:     input VCF file        -
+         [o] output VCF file       -
+         [w] sorting window size   10000
+         [r] reference FASTA file  /panfs/roc/rissdb/genomes/Homo_sapiens/hg19/seq/hg19.fa
+
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209101802..209101892
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209103794..209103956
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209104586..209104726
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209106717..209106868
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209108150..209108327
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209110042..209110147
+WARNING(freebayes): Could not find any mapped reads in target region chr2:209116153..209116274
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178917477..178917686
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178919077..178919327
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178922290..178922375
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178927382..178927487
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178927973..178928125
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178936983..178937064
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178937358..178937522
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178937736..178937839
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178938773..178938944
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178941868..178941974
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178942487..178942608
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178943749..178943827
+WARNING(freebayes): Could not find any mapped reads in target region chr3:178947059..178947229
+WARNING(freebayes): Could not find any mapped reads in target region chr3:38180152..38180518
+WARNING(freebayes): Could not find any mapped reads in target region chr3:38181354..38181488
+WARNING(freebayes): Could not find any mapped reads in target region chr3:38181878..38182058
+WARNING(freebayes): Could not find any mapped reads in target region chr3:38182247..38182338
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55524181..55524247
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55561677..55561946
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55564449..55564730
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55565795..55565931
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55569889..55570057
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55573263..55573452
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55575589..55575704
+[W::vcf_parse] contig 'chr1' is not defined in the header. (Quick workaround: index the file with tabix.)
+[W::vcf_parse] contig 'chr2' is not defined in the header. (Quick workaround: index the file with tabix.)
+[W::vcf_parse] contig 'chr4' is not defined in the header. (Quick workaround: index the file with tabix.)
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55595500..55595650
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55597493..55597584
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55598036..55598163
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55602663..55602774
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55602886..55602985
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55603340..55603445
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55604594..55604722
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55124935..55124983
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55127261..55127578
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55129833..55130093
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55131085..55131215
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55133455..55133626
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55133718..55133907
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55136799..55136914
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55138560..55138686
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55139703..55139896
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55140697..55140791
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55141007..55141139
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55143554..55143658
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55144062..55144172
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55144528..55144681
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55146482..55146648
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55151537..55151652
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55152007..55152129
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55153596..55153707
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55154965..55155064
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55155175..55155280
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55156479..55156720
+WARNING(freebayes): Could not find any mapped reads in target region chr4:55161291..55161438
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170814952..170815009
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170817054..170817133
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170818308..170818427
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170818709..170818802
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170819713..170819819
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170819917..170819981
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170827156..170827213
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170827842..170827928
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170832305..170832406
+WARNING(freebayes): Could not find any mapped reads in target region chr5:170834703..170834777
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116371721..116371912
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116380003..116380137
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116380905..116381078
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116395408..116395568
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116397490..116397592
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116397691..116397827
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116398512..116398673
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116399444..116399543
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116403103..116403321
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116409698..116409844
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116411551..116411707
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116414934..116415164
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116417442..116417522
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116418829..116419010
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116422041..116422150
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116435708..116435844
+WARNING(freebayes): Could not find any mapped reads in target region chr7:116435940..116436177
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140434396..140434569
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140439611..140439745
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140449086..140449217
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140453986..140454032
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140476711..140476887
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140477790..140477874
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140481375..140481492
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140482820..140482956
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140487347..140487383
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140494107..140494266
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140500161..140500280
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140501211..140501359
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140507759..140507861
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140508691..140508794
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140534408..140534671
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140549910..140550011
+WARNING(freebayes): Could not find any mapped reads in target region chr7:140624365..140624502
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55086970..55087057
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55209978..55210129
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55210997..55211180
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55214298..55214432
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55218986..55219054
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55220238..55220356
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55221703..55221844
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55223522..55223638
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55224225..55224351
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55224451..55224524
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55225355..55225445
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55227831..55228030
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55229191..55229323
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55231425..55231515
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55232972..55233129
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55238867..55238905
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55240675..55240816
+[W::vcf_parse] contig 'chr5' is not defined in the header. (Quick workaround: index the file with tabix.)
+[W::vcf_parse] contig 'chr7' is not defined in the header. (Quick workaround: index the file with tabix.)
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55260458..55260533
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55266409..55266555
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55268008..55268105
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55268880..55269047
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55269427..55269474
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55270209..55270317
+WARNING(freebayes): Could not find any mapped reads in target region chr7:55272948..55273309
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5021987..5022212
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5029782..5029905
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5044402..5044519
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5050685..5050830
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5054562..5054883
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5055668..5055787
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5064882..5065039
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5066677..5066788
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5069021..5069207
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5072491..5072625
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5077452..5077579
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5078305..5078443
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5080228..5080379
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5080532..5080682
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5081724..5081860
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5089673..5089862
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5090445..5090569
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5090738..5090910
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5123003..5123120
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5126332..5126445
+WARNING(freebayes): Could not find any mapped reads in target region chr9:5126683..5126790
+WARNING(freebayes): Could not find any mapped reads in target region chrX:48650250..48650627
+WARNING(freebayes): Could not find any mapped reads in target region chrX:48650729..48650874
+WARNING(freebayes): Could not find any mapped reads in target region chrX:48651578..48651703
+WARNING(freebayes): Could not find any mapped reads in target region chrX:48652199..48652570
+WARNING(freebayes): Could not find any mapped reads in target region chr11:532635..532754
+WARNING(freebayes): Could not find any mapped reads in target region chr11:533452..533611
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32410603..32410724
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32414211..32414300
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32421493..32421589
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32438035..32438085
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32439122..32439199
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32449501..32449603
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32450042..32450164
+WARNING(freebayes): Could not find any mapped reads in target region chr11:32456245..32456890
+WARNING(freebayes): Could not find any mapped reads in target region chr12:25362728..25362844
+WARNING(freebayes): Could not find any mapped reads in target region chr12:25378547..25378706
+[W::vcf_parse] contig 'chr9' is not defined in the header. (Quick workaround: index the file with tabix.)
+[W::vcf_parse] contig 'chr11' is not defined in the header. (Quick workaround: index the file with tabix.)
+[W::vcf_parse] contig 'chr12' is not defined in the header. (Quick workaround: index the file with tabix.)
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28578188..28578310
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28588588..28588693
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28589293..28589392
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28589726..28589837
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28592603..28592725
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28597486..28597613
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28598997..28599079
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28601224..28601377
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28602314..28602424
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28608437..28608543
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28609631..28609809
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28610071..28610179
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28611321..28611424
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28622411..28622579
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28623520..28623673
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28623771..28623910
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28624231..28624358
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28626681..28626810
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28631483..28631598
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28636003..28636205
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28644627..28644748
+WARNING(freebayes): Could not find any mapped reads in target region chr13:28674604..28674646
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90627497..90627584
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90628047..90628139
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90628232..90628329
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90628506..90628618
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90630343..90630494
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90630670..90630806
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90633710..90633875
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90634784..90634875
+WARNING(freebayes): Could not find any mapped reads in target region chr15:90645507..90645621
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37856491..37856563
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37863242..37863393
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37864573..37864786
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37865570..37865704
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37866065..37866133
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37866338..37866453
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37866592..37866733
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37868180..37868299
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37868574..37868700
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37871538..37871611
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37871698..37871788
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37871992..37872191
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37872553..37872685
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37872767..37872857
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37881301..37881456
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37881579..37881654
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37881959..37882105
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37882814..37882911
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37883067..37883255
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37883547..37883799
+WARNING(freebayes): Could not find any mapped reads in target region chr17:37883941..37884296
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13049493..13049583
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13049947..13050048
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13050241..13050444
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13050866..13050960
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13051056..13051265
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13051354..13051467
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13051557..13051700
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13054350..13054442
+WARNING(freebayes): Could not find any mapped reads in target region chr19:13054526..13054726
+[W::vcf_parse] contig 'chr13' is not defined in the header. (Quick workaround: index the file with tabix.)
+[W::vcf_parse] contig 'chr15' is not defined in the header. (Quick workaround: index the file with tabix.)
+
+stats: biallelic
+          no. left trimmed                      : 0
+          no. left trimmed and left aligned     : 0
+          no. left trimmed and right trimmed    : 0
+          no. left aligned                      : 1
+          no. right trimmed                     : 0
+
+       total no. biallelic normalized           : 1
+
+       multiallelic
+          no. left trimmed                      : 0
+          no. left trimmed and left aligned     : 0
+          no. left trimmed and right trimmed    : 0
+          no. left aligned                      : 0
+          no. right trimmed                     : 0
+
+       total no. multiallelic normalized        : 0
+
+       total no. variants normalized            : 1
+       total no. variants observed              : 486
+
+Time elapsed: 0.02s
+
