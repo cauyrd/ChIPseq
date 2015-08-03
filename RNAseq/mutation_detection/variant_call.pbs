@@ -1,0 +1,37 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+newgrp farrarm
+
+ref_genome_fasta=/panfs/roc/rissdb/genomes/Mus_musculus/mm10/seq/mm10.fa
+pwd=/home/farrarm/shared/riss/rnaseq_july2015/ryang/cuffdiff/new
+
+
+cd $pwd/pe_rep1
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/pe_rep1.vcf
+cd $pwd/pe_rep2
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/pe_rep2.vcf
+cd $pwd/pe_rep3
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/pe_rep3.vcf
+cd $pwd/pe_rep4
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/pe_rep4.vcf
+cd $pwd/pe_rep5
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/pe_rep5.vcf
+
+cd $pwd/wt_rep3
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/wt_rep3.vcf
+cd $pwd/wt_rep2
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/wt_rep2.vcf
+cd $pwd/wt_rep1
+freebayes -f $ref_genome_fasta -X -u  accepted_hits.bam >var.vcf
+mv var.vcf $pwd/variant_detect/wt_rep1.vcf

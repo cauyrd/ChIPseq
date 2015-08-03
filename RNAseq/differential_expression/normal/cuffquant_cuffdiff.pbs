@@ -1,0 +1,80 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+module load cufflinks
+
+newgrp farrarm
+
+ref_genome_fasta=/panfs/roc/rissdb/genomes/Mus_musculus/mm10/bowtie2/mm10.fa
+gtf_igenome=/panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2014-05-23-16-05-10/Genes/genes.gtf
+pwd=/home/farrarm/shared/riss/rnaseq_july2015/ryang/cuffdiff/new
+
+cuffmerge -g $gtf_igenome -o cuffmerge_gtf gtf_list.txt
+gtf=/home/farrarm/shared/riss/rnaseq_july2015/ryang/cuffdiff/new/cuffmerge_gtf/merged.gtf
+
+cd $pwd/ebf1_rep1
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../ebf1_rep1_abundances.cxb
+
+cd $pwd/ebf1_rep2
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../ebf1_rep2_abundances.cxb
+
+cd $pwd/ebf1_rep3
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../ebf1_rep3_abundances.cxb
+
+cd $pwd/pax5_rep1
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pax5_rep1_abundances.cxb
+
+cd $pwd/pax5_rep2
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pax5_rep2_abundances.cxb
+
+cd $pwd/pax5_rep3
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pax5_rep3_abundances.cxb
+
+cd $pwd/wt_rep1
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../wt_rep1_abundances.cxb
+
+cd $pwd/wt_rep2
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../wt_rep2_abundances.cxb
+
+cd $pwd/wt_rep3
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../wt_rep3_abundances.cxb
+
+cd $pwd/pe_rep1
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pe_rep1_abundances.cxb
+
+cd $pwd/pe_rep2
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pe_rep2_abundances.cxb
+
+cd $pwd/pe_rep3
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pe_rep3_abundances.cxb
+
+cd $pwd/pe_rep4
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pe_rep4_abundances.cxb
+
+cd $pwd/pe_rep5
+cuffquant -p 4 -b $ref_genome_fasta -u $gtf accepted_hits.bam
+mv abundances.cxb ../pe_rep5_abundances.cxb
+
+cd $pwd
+cuffdiff -p 4 -o cuffdiff_ebf1_pax5 -L ebf1,pax5 $gtf ebf1_rep1_abundances.cxb,ebf1_rep2_abundances.cxb,ebf1_rep3_abundances.cxb pax5_rep1_abundances.cxb,pax5_rep2_abundances.cxb,pax5_rep3_abundances.cxb 
+cuffdiff -p 4 -o cuffdiff_ebf1_wt -L ebf1,wt $gtf ebf1_rep1_abundances.cxb,ebf1_rep2_abundances.cxb,ebf1_rep3_abundances.cxb wt_rep1_abundances.cxb,wt_rep2_abundances.cxb,wt_rep3_abundances.cxb 
+cuffdiff -p 4 -o cuffdiff_ebf1_pe -L ebf1,pe $gtf ebf1_rep1_abundances.cxb,ebf1_rep2_abundances.cxb,ebf1_rep3_abundances.cxb pe_rep1_abundances.cxb,pe_rep2_abundances.cxb,pe_rep3_abundances.cxb,pe_rep4_abundances.cxb,pe_rep5_abundances.cxb   
+cuffdiff -p 4 -o cuffdiff_pax5_wt -L pax5,wt $gtf pax5_rep1_abundances.cxb,pax5_rep2_abundances.cxb,pax5_rep3_abundances.cxb wt_rep1_abundances.cxb,wt_rep2_abundances.cxb,wt_rep3_abundances.cxb 
+cuffdiff -p 4 -o cuffdiff_pax5_pe -L pax5,pe $gtf pax5_rep1_abundances.cxb,pax5_rep2_abundances.cxb,pax5_rep3_abundances.cxb pe_rep1_abundances.cxb,pe_rep2_abundances.cxb,pe_rep3_abundances.cxb,pe_rep4_abundances.cxb,pe_rep5_abundances.cxb   
+cuffdiff -p 4 -o cuffdiff_pe_wt -L pe,wt $gtf pe_rep1_abundances.cxb,pe_rep2_abundances.cxb,pe_rep3_abundances.cxb,pe_rep4_abundances.cxb,pe_rep5_abundances.cxb wt_rep1_abundances.cxb,wt_rep2_abundances.cxb,wt_rep3_abundances.cxb 

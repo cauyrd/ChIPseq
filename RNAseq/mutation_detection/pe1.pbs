@@ -1,0 +1,7 @@
+#!/bin/bash -l
+#PBS -l walltime=24:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+python complement.py pe_rep1_not_in_wt.vcf Mus_musculus.vcf
+

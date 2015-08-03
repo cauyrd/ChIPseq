@@ -1,0 +1,14 @@
+#!/bin/bash -l
+#PBS -l walltime=24:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+module load bwa
+module load samtools
+
+bwa mem -x pacbio /panfs/roc/rissdb/genomes/Homo_sapiens/hg19/bwa/hg19.fa test.fa >bwa.sam
+samtools view -bS bwa.sam > bwa.bam
+samtools sort bwa.bam bwa.sorted
+samtools index bwa.sorted.bam
+rm bwa.bam
+rm bwa.sam

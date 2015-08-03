@@ -1,0 +1,25 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+module load tophat
+module load bowtie
+module load samtools
+module load picard-tools/1.83
+module load R
+module load cufflinks
+
+
+newgrp farrarm 
+
+pwd=/home/farrarm/shared/riss/rnaseq_july2015
+ref_genome_bowtie_index=/panfs/roc/rissdb/genomes/Mus_musculus/mm10/bowtie2/mm10
+ref_genome_fasta=/panfs/roc/rissdb/genomes/Mus_musculus/mm10/seq/mm10.fa
+gtf=/panfs/roc/rissdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Archives/archive-2014-05-23-16-05-10/Genes/genes.gtf
+tophat2 -o wt_rep1 -p 4 -r 240 --mate-std-dev 150 -G $gtf $ref_genome_bowtie_index $pwd/WT1_ATCACG_R1_cat.fastq $pwd/WT1_ATCACG_R2_cat.fastq
+
+cd $PBS_O_WORKDIR/wt_rep1
+
+cufflinks -p 4 -b $ref_genome_fasta -G $gtf accepted_hits.bam

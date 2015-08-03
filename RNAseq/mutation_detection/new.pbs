@@ -1,0 +1,66 @@
+#!/bin/bash -l
+#PBS -l walltime=72:00:00,nodes=1:ppn=8,mem=8gb
+#PBS -m abe
+#PBS -M yang4414@umn.edu
+cd $PBS_O_WORKDIR
+
+module load bwa
+module load samtools
+
+
+newgrp farrarm 
+
+pwd=/home/farrarm/shared/riss/rnaseq_july2015
+ref_genome_bwa_index=/panfs/roc/rissdb/genomes/Mus_musculus/mm10/bwa/mm10.fa
+ref_genome_fasta=/panfs/roc/rissdb/genomes/Mus_musculus/mm10/seq/mm10.fa
+
+bwa mem $ref_genome_bwa_index $pwd/WT1_ATCACG_R1_cat.fastq $pwd/WT1_ATCACG_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam wt_rep1.sorted
+samtools index wt_rep1.sorted.bam
+freebayes -f $ref_genome_fasta -X -u wt_rep1.sorted.bam >wt_rep1.vcf
+
+
+bwa mem $ref_genome_bwa_index $pwd/WT2_CGATGT_R1_cat.fastq $pwd/WT2_CGATGT_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam wt_rep2.sorted
+samtools index wt_rep2.sorted.bam
+freebayes -f $ref_genome_fasta -X -u wt_rep2.sorted.bam >wt_rep2.vcf
+
+bwa mem $ref_genome_bwa_index $pwd/WT3_TTAGGC_R1_cat.fastq $pwd/WT3_TTAGGC_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam wt_rep3.sorted
+samtools index wt_rep2.sorted.bam
+freebayes -f $ref_genome_fasta -X -u wt_rep3.sorted.bam >wt_rep3.vcf
+
+bwa mem $ref_genome_bwa_index $pwd/PE_E8147_ATCACG_R1_cat.fastq $pwd/PE_E8147_ATCACG_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam pe_rep1.sorted
+samtools index pe_rep1.sorted.bam
+freebayes -f $ref_genome_fasta -X -u pe_rep1.sorted.bam >pe_rep1.vcf
+
+bwa mem $ref_genome_bwa_index $pwd/PE_E8479_CGATGT_R1_cat.fastq $pwd/PE_E8479_CGATGT_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam pe_rep2.sorted
+samtools index pe_rep2.sorted.bam
+freebayes -f $ref_genome_fasta -X -u pe_rep2.sorted.bam >pe_rep2.vcf
+
+
+bwa mem $ref_genome_bwa_index $pwd/PE_E9700_GGCTAC_R1_cat.fastq $pwd/PE_E9700_GGCTAC_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam pe_rep3.sorted
+samtools index pe_rep3.sorted.bam
+freebayes -f $ref_genome_fasta -X -u pe_rep3.sorted.bam >pe_rep3.vcf
+
+bwa mem $ref_genome_bwa_index $pwd/PE_F7559_TAGCTT_R1_cat.fastq $pwd/PE_F7559_TAGCTT_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam pe_rep4.sorted
+samtools index pe_rep4.sorted.bam
+freebayes -f $ref_genome_fasta -X -u pe_rep4.sorted.bam >pe_rep4.vcf
+
+bwa mem $ref_genome_bwa_index $pwd/PE_F82_CTTGTA_R1_cat.fastq $pwd/PE_F82_CTTGTA_R2_cat.fastq >temp.sam
+samtools view -bS temp.sam >temp.bam
+samtools sort temp.bam pe_rep5.sorted
+samtools index pe_rep5.sorted.bam
+freebayes -f $ref_genome_fasta -X -u pe_rep5.sorted.bam >pe_rep5.vcf
+
